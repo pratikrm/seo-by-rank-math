@@ -24,6 +24,20 @@ defined( 'ABSPATH' ) || exit;
  */
 class Registration {
 
+	/**
+	 * The current step.
+	 *
+	 * @var string
+	 */
+	protected $step;
+
+	/**
+	 * The current step slug.
+	 *
+	 * @var string
+	 */
+	protected $step_slug;
+
 	use Hooker;
 
 	/**

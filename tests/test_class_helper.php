@@ -39,9 +39,23 @@ class Test_Class_Helper extends WP_UnitTestCase {
 	 * Test replace_vars().
 	 */
 	public function test_replace_vars() {
+		rank_math()->variables = new RankMath\Replace_Variables\Manager();
+		rank_math_register_var_replacement(
+			'custom_variable',
+			[
+				'name'        => 'Custom Variable',
+				'description' => 'Custom variable for testing.',
+				'variable'    => 'custom_variable',
+				'example'     => 'custom_variable_example',
+			],
+			function() {
+				return 'World';
+			}
+		);
+
 		$this->assertSame(
 			'Hello World',
-			RankMath\Helper::replace_vars( 'Hello %custom_variable%', [ 'custom_variable' => 'World' ] )
+			RankMath\Helper::replace_vars( 'Hello %custom_variable%' )
 		);
 	}
 }

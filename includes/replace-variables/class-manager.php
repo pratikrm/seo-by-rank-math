@@ -23,6 +23,13 @@ defined( 'ABSPATH' ) || exit;
 class Manager extends Post_Variables {
 
 	/**
+	 * Hold temporary arguments.
+	 *
+	 * @var array
+	 */
+	public $tmp_args = [];
+
+	/**
 	 * Register variable replacements.
 	 *
 	 * @var array

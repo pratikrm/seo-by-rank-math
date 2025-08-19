@@ -21,6 +21,20 @@ defined( 'ABSPATH' ) || exit;
 class Replacer {
 
 	/**
+	 * Holds the arguments passed to the replacer.
+	 *
+	 * @var array
+	 */
+	public $args = [];
+
+	/**
+	 * Holds the excluded variables.
+	 *
+	 * @var array
+	 */
+	public $exclude = [];
+
+	/**
 	 * Default post data.
 	 *
 	 * @var array
