@@ -1,0 +1,1 @@
+{"version":1,"defects":{"Test_Class_Helper::test_replace_vars":4},"times":{"Test_Class_Helper::test_get_settings_default_value":0.005,"Test_Class_Helper::test_get_midnight":0.002,"Test_Class_Helper::test_get_url_part":0.001,"Test_Class_Helper::test_replace_vars":0.004}}
