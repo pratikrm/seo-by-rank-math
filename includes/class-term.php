@@ -59,10 +59,16 @@ class Term extends Metadata {
 	 *                         disambiguating potentially shared terms.
 	 */
 	private static function get_term_id( $term = 0, $taxonomy = null ) {
+		if ( is_object( $term ) && isset( $term->term_id ) ) {
+			return $term->term_id;
+		}
+
 		if ( is_string( $term ) ) {
 			$term = get_term_by( 'slug', $term, $taxonomy );
 		} elseif ( is_int( $term ) && 0 === absint( $term ) ) {
 			$term = $GLOBALS['wp_query']->get_queried_object();
+		} elseif ( is_int( $term ) && $term > 0 ) {
+			$term = get_term( $term, $taxonomy );
 		}
 
 		if ( is_object( $term ) && isset( $term->term_id ) ) {

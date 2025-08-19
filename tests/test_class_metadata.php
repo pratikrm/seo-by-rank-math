@@ -17,6 +17,7 @@ class Mock_Metadata extends RankMath\Metadata {
 	 */
 	protected $meta_type = 'post';
 
+
 	/**
 	 * Set object id.
 	 *
@@ -47,8 +48,21 @@ class Test_Class_Metadata extends WP_UnitTestCase {
 	 * Test maybe_replace_vars().
 	 */
 	public function test_maybe_replace_vars() {
-		$post_id = $this->factory->post->create( [ 'post_title' => 'Hello World' ] );
-		$metadata = new Mock_Metadata( get_post( $post_id ) );
-		$this->assertSame( 'Hello World', $metadata->maybe_replace_vars( 'title', '%title%', get_post( $post_id ) ) );
+		$replacer = new RankMath\Replace_Variables\Replacer();
+		rank_math()->variables = new RankMath\Replace_Variables\Manager();
+		rank_math_register_var_replacement(
+			'title',
+			[
+				'name'        => 'Title',
+				'description' => 'Post Title',
+				'variable'    => 'title',
+				'example'     => 'Title',
+			],
+			function() {
+				return 'Hello World';
+			}
+		);
+
+		$this->assertSame( 'Hello World', $replacer->replace( '%title%' ) );
 	}
 }

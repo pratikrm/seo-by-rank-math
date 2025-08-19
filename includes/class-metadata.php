@@ -115,8 +115,11 @@ abstract class Metadata {
 			return $default;
 		}
 
-		$this->$meta_key = Helper::normalize_data( $value );
-		return $this->$meta_key;
+		$normalized_value = Helper::normalize_data( $value );
+		if ( property_exists( $this, $meta_key ) ) {
+			$this->$meta_key = $normalized_value;
+		}
+		return $normalized_value;
 	}
 
 	/**
